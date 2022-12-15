@@ -1,0 +1,20 @@
+{#    ニュース一覧のテンプレート    #}
+<script id="templateNewsCard" type="text/html">
+    <div class="row card brown lighten-3">
+        {# 画像がなければ表示しない #}
+            <div class="col s2">
+                <div class="card-image-position">
+                    <img src="<%: imageUrl %>" alt="news-image">
+                </div>
+            </div>
+        <div class="card-content col s10 card-height">
+            <span class="card-title brown-text text-darken-2"><%: title %></span>
+            <p class="card-text brown-text text-darken-2"><%: text %></p>
+            <a href="<%: url %>" class="card-url"><%: url %></a>
+            <p class="card-date brown-text text-darken-2"><%: createDt %></p>
+            {# このボタンが押されたら発火 #}
+            <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                        class="material-icons">add</i></a>
+        </div>
+    </div>
+</script>

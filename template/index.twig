@@ -1,0 +1,125 @@
+{# @var entity \Adm\Entity\News #}
+
+{% extends 'layouts/layout.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <div>
+        {% include('loading.twig') %}
+        <div class="deep-purple lighten-5">
+            <a id="getYahooNews" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Yahoo</a>
+            <a id="getITMedia" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>ITmedia</a>
+        </div>
+
+        <div id="app" class="row deep-purple lighten-5">
+            <div id="newsList" class="col s7">
+                {% include('news_card.twig') %}
+                {#                {% for entity in entities %} #}
+                {#                    {% if entity.comparisonDate %} #}
+                {#                        #}{# カード #}
+                {#                        <div id="cardId{{ entity.NewsId }}" class="row card brown lighten-3"> #}
+                {#                            #}{# 画像がなければ表示しない #}
+                {#                            {% if entity.NewsImage != '' %} #}
+                {#                                <div class="col s2"> #}
+                {#                                    <div class="card-image-position"> #}
+                {#                                        <img src="{{ entity.NewsImage }}" alt="news-image"> #}
+                {#                                    </div> #}
+                {#                                </div> #}
+                {#                            {% endif %} #}
+                {#                            <div class="card-content col s10 card-height"> #}
+                {#                                <span class="card-title brown-text text-darken-2">{{ entity.NewsTitle }}</span> #}
+                {#                                <p class="card-text brown-text text-darken-2">{{ entity.NewsText }}</p> #}
+                {#                                <a href="{{ entity.NewsUrl }}" class="card-url">{{ entity.NewsUrl }}</a> #}
+                {#                                <p class="card-date brown-text text-darken-2">{{ entity.CreateDt }}</p> #}
+                {#                                #}{# このボタンが押されたら発火 #}
+                {#                                <a id="{{ entity.NewsId }}" #}
+                {#                                   class="btn-floating halfway-fab waves-effect waves-light red"><i #}
+                {#                                            class="material-icons">add</i></a> #}
+                {#                            </div> #}
+                {#                        </div> #}
+                {#                    {% endif %} #}
+                {#                {% endfor %} #}
+            </div>
+
+            {# メール送信ボタン 危ないのでignore済み #}
+            {#            <button id="sendMail" class="btn waves-effect waves-light" type="submit" name="action">送信 #}
+            {#                <i class="material-icons right">send</i> #}
+            {#            </button> #}
+            {# メールテキスト #}
+            <div id="mailBody">
+                {% include('mail/hirayama.twig') %}
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/scroll.js"></script> 
+    <script src="/js/moving-content.js"></script>
+    <script src="/js/sendMail.js"></script>
+
+    <script>
+        $('#getYahooNews').click(function () {
+            $.ajax({
+                url: '/php/getYahooNews.php',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function () {
+                    $('.loader-wrap').css('display', 'flex');
+                }
+
+            })
+                .done(function (res) {
+                    console.log(res);
+                    $('.loader-wrap').fadeOut();
+                    res.forEach(item => {
+                            const news = new News();
+                            news.title = item['NewsTitle'];
+                            news.text = item['NewsText'];
+                            news.url = item['NewsUrl'];
+                            news.imageUrl = item['NewsImage'];
+                            news.createDt = item['CreateDt'];
+                            // console.log(news);
+                            // twigとバインド文字が被っているので <% %> でバインドできるようにする
+                            $.views.settings.delimiters("<%", "%>");
+                            const template = $("#templateNewsCard");
+                            const newsHtml = template.render(news);
+                            $('#newsList').append(newsHtml);
+                        }
+                    );
+                })
+        });
+
+        $('#getITMedia').click(function () {
+            $.ajax({
+                url: '/php/getITMedia.php',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function () {
+                    $('.loader-wrap').css('display', 'flex');
+                }
+
+            })
+                .done(function (res) {
+                    console.log(res);
+                    $('.loader-wrap').fadeOut();
+                    res.forEach(item => {
+                            const news = new News();
+                            news.title = item['NewsTitle'];
+                            news.text = item['NewsText'];
+                            news.url = item['NewsUrl'];
+                            news.imageUrl = item['NewsImage'];
+                            news.createDt = item['CreateDt'];
+                            // console.log(news);
+                            // twigとバインド文字が被っているので <% %> でバインドできるようにする
+                            $.views.settings.delimiters("<%", "%>");
+                            const template = $("#templateNewsCard");
+                            const newsHtml = template.render(news);
+                            $('#newsList').append(newsHtml);
+                        }
+                    );
+                })
+        });
+    </script>
+
+{% endblock %}

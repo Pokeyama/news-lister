@@ -1,0 +1,13 @@
+{# 以下のid=mailText要素にメールの文章をappendしていく #}
+<div id="mailText" class="col s5">
+    <div style="text-align:center"><font size="6" color="#a1887f"><b>ITニュース</b></font></div>
+</div>
+{#    メールのテンプレート    #}
+<script id="templateHirayma" type="text/html">
+    <div><font size="4"><b>【<%: title %>】</b></font></div>
+    <div><b><font size="4"></font></b></div>
+    <div><font size="4">概要：<%: text %></font></div>
+    <div>URL：&nbsp;&nbsp;<a href="<%: url %>" target="_blank"><%: url %></a>
+    </div>
+    <div><font size="4"><br></font></div>
+</script>

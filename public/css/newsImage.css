@@ -1,0 +1,19 @@
+.card-image-position{
+    height: 200px;
+    /*background-color: red;*/
+    display: flex;
+    object-fit: cover;
+}
+
+.card-image-position img{
+    height: 90%;
+    width: 100%;
+    object-fit: cover;
+    margin-top: 17%;
+}
+
+.card-height {
+    /*position: relative;*/
+    /*padding-top: 10%;*/
+    height: 230px;
+}

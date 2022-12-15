@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  php:
+    build: ./docker/php
+    container_name: owl-php
+    image: owl-php:0.0.1
+    working_dir: /var/www
+    command: composer start
+    ports:
+      - 8080:8080
+    environment:
+      - PROJECT_ENV=local
+    volumes:
+      - .:/var/www
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1M"
+        max-file: "3"
+        
+  memcached:
+    build: ./docker/memcached
+    container_name: owl-memcached
+    image: owl-memcached:latest
+    ports:
+      - 11211:11211

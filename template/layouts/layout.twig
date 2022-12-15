@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Twig{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/newsImage.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/loading.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.js" integrity="sha512-DZGlWQ3NEn4hVfqWCJ8ePZg3WWKrMXP0qfzBrcQ7fwePfdwUG67Qaj9ABsEBTiHmEREkkEAVFGWmzJDUi+MK4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+{#{% include 'layouts/layout_header.twig' %}#}
+
+{% block content %}{% endblock %}
+
+{#{% include 'layouts/layout_footer.twig' %}#}
+</body>
+</html>
