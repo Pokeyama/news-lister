@@ -14,7 +14,7 @@ if (!$result = $memcached->get("itmedia")){
     if ($memcached->getResultCode() == \Memcached::RES_NOTFOUND){
         $scrapingITMedia = new ScrapingITmedia();
         $result = $scrapingITMedia->getNewsList();
-        $memcached->set("itmedia",json_encode($result),300);
+        $memcached->set("itmedia",json_encode($result),36000);
     }
 }
 else{

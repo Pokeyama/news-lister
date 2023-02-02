@@ -30,7 +30,6 @@ class News {
 $(document).on("click", ".btn-floating", function () {
         // 追加ボタンを押されたニュースを解析してオブジェクトに保管
 
-        console.log("aaaaa");
         const news = new News();
         news.domParse($(this).parent());
         console.log(news);

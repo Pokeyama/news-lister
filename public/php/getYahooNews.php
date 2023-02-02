@@ -16,7 +16,7 @@ if (!$result = $memcached->get("yahoo")){
     if ($memcached->getResultCode() == \Memcached::RES_NOTFOUND){
         $scrapingYahoo = new ScrapingYahoo();
         $result = $scrapingYahoo->getNewsList();
-        $memcached->set("yahoo",json_encode($result),300);
+        $memcached->set("yahoo",json_encode($result),36000);
     }
 }
 else{
